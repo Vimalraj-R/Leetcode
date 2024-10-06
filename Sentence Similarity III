@@ -1,0 +1,35 @@
+class Solution {
+
+    // Helper function to split a sentence into words
+    private String[] splitWords(String sentence) {
+        return sentence.split(" ");
+    }
+
+    public boolean areSentencesSimilar(String sentence1, String sentence2) {
+        // Split both sentences into arrays of words
+        String[] w1 = splitWords(sentence1);
+        String[] w2 = splitWords(sentence2);
+
+        // Ensure words1 is the longer sentence
+        if (w1.length < w2.length) {
+            String[] temp = w1;
+            w1 = w2;
+            w2 = temp;
+        }
+
+        int start = 0, end = 0;
+
+        // Compare from the start
+        while (start < w2.length && w1[start].equals(w2[start])) {
+            start++;
+        }
+
+        // Compare from the end
+        while (end < w2.length && w1[w1.length - end - 1].equals(w2[w2.length - end - 1])) {
+            end++;
+        }
+
+        // Check if the remaining unmatched part is in the middle
+        return start + end >= w2.length;
+    }
+}
